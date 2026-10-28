@@ -336,30 +336,35 @@ class SignInManager:
             login_selectors = [
                 "//button[@type='submit']//em[contains(text(), '登录')]/..",
                 "//button[contains(text(), '登录')]",
+                "//a[contains(@href, 'logging.php?action=login')]",
+                "//a[contains(@href, 'mod=logging&action=login')]",
+                "//a[contains(text(), '登录')]",
                 "#loginsubmit",
             ]
 
             login_button = self.element_finder.find_clickable_by_selectors(
-                login_selectors
+                login_selectors, timeout=5
             )
-            if not login_button:
-                self.logger.error("未找到登录按钮")
-                return False
+            if login_button:
+                button_text = login_button.text
+                self.logger.debug(f"找到登录按钮，文本: '{button_text}'，准备点击")
+                BrowserHelper.safe_click(self.driver, login_button, self.logger)
+                TimingManager.smart_wait(TimingManager.NAVIGATION_DELAY, 1.0, self.logger)
 
-            button_text = login_button.text
-            self.logger.debug(f"找到登录按钮，文本: '{button_text}'，准备点击")
-            BrowserHelper.safe_click(self.driver, login_button, self.logger)
-            TimingManager.smart_wait(TimingManager.NAVIGATION_DELAY, 1.0, self.logger)
-
-            # 等待登录弹窗
-            self.logger.debug("等待登录弹窗出现")
-            login_popup = self.element_finder.find_by_selectors(
-                ["#fwin_login"], timeout=5
-            )
-            if not login_popup:
-                self.logger.warning("未检测到登录弹窗")
+                # 等待登录弹窗
+                self.logger.debug("等待登录弹窗出现")
+                login_popup = self.element_finder.find_by_selectors(
+                    ["#fwin_login"], timeout=5
+                )
+                if not login_popup:
+                    self.logger.warning("未检测到登录弹窗，尝试直接查找表单")
+                else:
+                    self.logger.debug("登录弹窗已出现")
             else:
-                self.logger.debug("登录弹窗已出现")
+                self.logger.warning("页面中未找到登录按钮，直接导航到独立登录页...")
+                login_page_url = f"{self.base_url}/member.php?mod=logging&action=login"
+                self.driver.get(login_page_url)
+                TimingManager.smart_wait(TimingManager.PAGE_LOAD_DELAY, 1.0, self.logger)
 
             # 填写登录表单
             self.logger.debug("开始填写登录表单")
@@ -450,6 +455,202 @@ class SignInManager:
         except Exception:
             return None
 
+    @staticmethod
+    def _solve_slide_or_drag(master_bytes: bytes, thumb_bytes: bytes, display_y: Optional[int] = None, is_drag: bool = False):
+        """求解滑块或拖拽拼图验证码"""
+        import numpy as np
+        import cv2
+
+        master_arr = np.frombuffer(master_bytes, dtype=np.uint8)
+        thumb_arr = np.frombuffer(thumb_bytes, dtype=np.uint8)
+        master = cv2.imdecode(master_arr, cv2.IMREAD_UNCHANGED)
+        thumb = cv2.imdecode(thumb_arr, cv2.IMREAD_UNCHANGED)
+
+        # 优先使用 ddddocr 识别标准 slide
+        if not is_drag:
+            try:
+                import ddddocr
+                det = ddddocr.DdddOcr(det=False, ocr=False, show_bannar=False)
+                res = det.slide_match(thumb_bytes, master_bytes, simple_target=True)
+                target_x = res["target"][0]
+                target_y = display_y if display_y is not None else res["target"][1]
+                return target_x, target_y
+            except Exception:
+                pass
+
+        # OpenCV 边缘模板匹配
+        m_gray = cv2.cvtColor(master, cv2.COLOR_BGR2GRAY)
+        if thumb.shape[2] == 4:
+            t_gray = cv2.cvtColor(thumb[:, :, :3], cv2.COLOR_BGR2GRAY)
+        else:
+            t_gray = cv2.cvtColor(thumb, cv2.COLOR_BGR2GRAY)
+
+        m_edges = cv2.Canny(m_gray, 50, 150)
+        t_edges = cv2.Canny(t_gray, 50, 150)
+
+        res = cv2.matchTemplate(m_edges, t_edges, cv2.TM_CCOEFF_NORMED)
+        _, _, _, max_loc = cv2.minMaxLoc(res)
+        target_x = max_loc[0]
+        if is_drag:
+            target_y = max_loc[1]
+        else:
+            target_y = display_y if display_y is not None else max_loc[1]
+        return target_x, target_y
+
+    @staticmethod
+    def _solve_rotate(master_bytes: bytes, thumb_bytes: bytes) -> int:
+        """求解旋转验证码角度"""
+        import numpy as np
+        import cv2
+
+        master_arr = np.frombuffer(master_bytes, dtype=np.uint8)
+        thumb_arr = np.frombuffer(thumb_bytes, dtype=np.uint8)
+        m = cv2.imdecode(master_arr, cv2.IMREAD_UNCHANGED)
+        t = cv2.imdecode(thumb_arr, cv2.IMREAD_UNCHANGED)
+
+        h_m, w_m = m.shape[:2]
+        h_t, w_t = t.shape[:2]
+
+        cx, cy = w_m // 2, h_m // 2
+        r = h_t // 2
+
+        m_center = m[cy - r : cy + r, cx - r : cx + r]
+
+        mask = np.zeros((h_t, w_t), dtype=np.uint8)
+        cv2.circle(mask, (r, r), r - 5, 255, -1)
+
+        best_angle = 0
+        best_score = -1
+
+        for angle in range(0, 360, 2):
+            M = cv2.getRotationMatrix2D((r, r), -angle, 1.0)
+            rotated_thumb = cv2.warpAffine(t, M, (w_t, h_t))
+            res = cv2.matchTemplate(m_center, rotated_thumb, cv2.TM_CCORR_NORMED, mask=mask)
+            score = res[0][0]
+            if score > best_score:
+                best_score = score
+                best_angle = angle
+
+        return best_angle
+
+    def _auto_solve_gocaptcha(self) -> bool:
+        """
+        自动识别并提交 98堂 GoCaptcha 验证码
+        支持 slide(滑块)、drag(拼图)、rotate(旋转角度)
+        """
+        import time
+        import base64
+
+        self.logger.info("🤖 启动 GoCaptcha 智能自动识别系统...")
+        max_attempts = 10
+
+        for attempt in range(max_attempts):
+            time.sleep(3.5)  # 严格控制请求间隔，避免 429 频率限制
+
+            # 检查是否已签到成功或弹窗已关闭
+            is_done = self.driver.execute_script("""
+                var c = document.getElementById("captcha-container");
+                var grey = document.querySelector(".ddpc_sign_btn_grey");
+                return (grey && grey.innerText.indexOf("已签到") !== -1) ||
+                       (!c || c.style.display === 'none' || window.getComputedStyle(c).display === 'none');
+            """)
+            if is_done and attempt > 0:
+                self.logger.info("✅ 签到已完成或验证码弹窗已关闭")
+                return True
+
+            self.logger.debug(f"[验证码识别] 第 {attempt + 1}/{max_attempts} 次尝试获取验证码")
+            cap = self.driver.execute_async_script("""
+                var done = arguments[0];
+                fetch('misc.php?mod=captcha')
+                    .then(r => r.json())
+                    .then(d => done(d))
+                    .catch(e => done({error: e.toString()}));
+            """)
+
+            code = cap.get("code")
+            if code != 200:
+                self.logger.warning(f"验证码接口返回状态: {code}, 消息: {cap.get('message')}")
+                time.sleep(4)
+                continue
+
+            data = cap.get("data", {})
+            c_type = data.get("type")
+            self.logger.info(f"🎯 捕获到验证码类型: {c_type}")
+
+            master_b64 = data.get("master_image_base64", "")
+            thumb_b64 = data.get("thumb_image_base64", "")
+            if not master_b64 or not thumb_b64:
+                continue
+
+            if "," in master_b64:
+                master_b64 = master_b64.split(",", 1)[1]
+            if "," in thumb_b64:
+                thumb_b64 = thumb_b64.split(",", 1)[1]
+
+            master_bytes = base64.b64decode(master_b64)
+            thumb_bytes = base64.b64decode(thumb_b64)
+
+            val = None
+            try:
+                if c_type in ("slide", "drag"):
+                    display_y = data.get("display_y")
+                    target_x, target_y = self._solve_slide_or_drag(
+                        master_bytes, thumb_bytes, display_y, is_drag=(c_type == "drag")
+                    )
+                    val = f"{target_x},{target_y}"
+                    self.logger.info(f"🧩 计算拼图/滑块坐标: {val}")
+
+                elif c_type == "rotate":
+                    angle = self._solve_rotate(master_bytes, thumb_bytes)
+                    val = str(angle)
+                    self.logger.info(f"🔄 计算旋转角度: {val}°")
+
+                else:
+                    self.logger.info(f"ℹ️ 遇到 {c_type} 验证码，自动刷新为滑块或旋转...")
+                    continue
+            except Exception as e:
+                self.logger.warning(f"验证码算法求解出错: {e}")
+                continue
+
+            if val:
+                self.logger.debug(f"正在提交验证数据: {val}")
+                check = self.driver.execute_async_script("""
+                    var val = arguments[0];
+                    var done = arguments[1];
+                    fetch('misc.php?mod=captcha&action=check', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: val
+                    })
+                    .then(r => r.json())
+                    .then(d => done(d))
+                    .catch(e => done({error: e.toString()}));
+                """, val)
+
+                if check.get("data") == "ok":
+                    self.logger.info("🎉 验证码校验成功！正在调用 sign_v2 接口签到...")
+                    time.sleep(1)
+                    sign_res = self.driver.execute_async_script("""
+                        var done = arguments[0];
+                        fetch('plugin.php?id=dd_sign&ac=sign_v2')
+                            .then(r => r.json())
+                            .then(d => done(d))
+                            .catch(e => done({error: e.toString()}));
+                    """)
+                    self.logger.info(f"🎊 签到接口响应: {sign_res}")
+
+                    # 关闭弹窗
+                    self.driver.execute_script("""
+                        var c = document.getElementById("captcha-container");
+                        if (c) c.style.display = 'none';
+                    """)
+                    time.sleep(2)
+                    return True
+                else:
+                    self.logger.warning(f"验证码提交校验未通过: {check}，继续重试...")
+
+        return False
+
     def handle_sign_verification(self) -> bool:
         """
         处理签到验证
@@ -460,6 +661,37 @@ class SignInManager:
         try:
             self.logger.debug("开始处理签到验证")
             TimingManager.smart_wait(TimingManager.NAVIGATION_DELAY, 1.0, self.logger)
+
+            # 优先检查 98堂 最新的 GoCaptcha 行为验证码弹窗
+            has_gocaptcha = self.driver.execute_script("""
+                var c = document.getElementById("captcha-container");
+                return c && c.style.display !== 'none' && window.getComputedStyle(c).display !== 'none';
+            """)
+            if has_gocaptcha:
+                # 优先尝试自动破解
+                if self._auto_solve_gocaptcha():
+                    self.logger.info("✅ GoCaptcha 自动验证并签到成功！")
+                    return True
+
+                # 若算法未能成功，转入人工兜底等待
+                self.logger.info("🧩 自动识别未完成，请在浏览器中完成验证（等待最多 2 分钟）...")
+                import time
+                for sec in range(120):
+                    time.sleep(1)
+                    # 检查验证码容器是否关闭或页面是否已刷新为已签到
+                    is_closed = self.driver.execute_script("""
+                        var c = document.getElementById("captcha-container");
+                        var grey = document.querySelector(".ddpc_sign_btn_grey");
+                        return (!c || c.style.display === 'none' || window.getComputedStyle(c).display === 'none') || !!grey;
+                    """)
+                    if is_closed:
+                        self.logger.info("✅ 验证码已通过或已关闭，等待签到状态更新...")
+                        time.sleep(3)
+                        return True
+                    if sec > 0 and sec % 30 == 0:
+                        self.logger.info(f"⏳ 正在等待验证码完成... (还剩 {120 - sec} 秒)")
+                self.logger.warning("⚠️ 等待验证码超时")
+                return False
 
             # 查找数学问题
             self.logger.debug("查找页面中的数学验证问题")
@@ -632,9 +864,12 @@ class SignInManager:
             self.logger.error(f"检查签到状态时出错: {e}")
             return "unknown"
 
-    def _perform_signin_action(self) -> bool:
+    def _perform_signin_action(self, verify: bool = True) -> bool:
         """
         执行具体的签到操作
+
+        Args:
+            verify: 是否递归验证签到结果
 
         Returns:
             是否签到成功
@@ -714,7 +949,9 @@ class SignInManager:
                 # 处理签到验证
                 if self.handle_sign_verification():
                     # 签到完成后，重新验证签到状态
-                    return self._verify_signin_success()
+                    if verify:
+                        return self._verify_signin_success()
+                    return True
                 else:
                     self.logger.error("❌ 签到验证失败")
                     return False
@@ -821,7 +1058,7 @@ class SignInManager:
                         TimingManager.smart_wait(wait_time, 1.0, self.logger)
 
                         # 重新执行签到操作
-                        if self._perform_signin_action():
+                        if self._perform_signin_action(verify=False):
                             self.logger.info("重新签到成功")
                             return True
                         else:
@@ -840,7 +1077,7 @@ class SignInManager:
                         TimingManager.smart_wait(wait_time, 1.0, self.logger)
 
                         # 重新执行签到操作
-                        if self._perform_signin_action():
+                        if self._perform_signin_action(verify=False):
                             self.logger.info("重新签到成功")
                             return True
                         else:

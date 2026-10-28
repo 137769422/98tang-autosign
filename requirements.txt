@@ -10,3 +10,7 @@ setuptools  # 解决Python 3.12+的distutils问题
 
 # Chrome驱动自动管理
 webdriver-manager>=4.0.0
+
+# 验证码识别依赖
+opencv-python-headless>=4.8.0
+ddddocr>=1.4.0

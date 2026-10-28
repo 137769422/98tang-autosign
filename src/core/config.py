@@ -40,6 +40,7 @@ class ConfigManager:
                 "password": os.getenv("SITE_PASSWORD", "").strip(),
                 "base_url": os.getenv("BASE_URL", "https://www.sehuatang.org"),
                 "headless": os.getenv("HEADLESS", "true").lower() == "true",
+                "browser_type": os.getenv("BROWSER_TYPE", "edge").lower().strip(),
                 "log_level": os.getenv("LOG_LEVEL", "DEBUG").upper(),
             }
         )
@@ -53,14 +54,15 @@ class ConfigManager:
         )
 
         # 安全提问配置
+        sec_q = os.getenv("SECURITY_QUESTION", "").strip()
+        sec_a = os.getenv("SECURITY_ANSWER", "").strip()
         self._config.update(
             {
-                "enable_security_question": os.getenv(
-                    "ENABLE_SECURITY_QUESTION", "false"
-                ).lower()
-                == "true",
-                "security_answer": os.getenv("SECURITY_ANSWER", "").strip(),
-                "security_question": os.getenv("SECURITY_QUESTION", "").strip(),
+                "security_answer": sec_a,
+                "security_question": sec_q,
+                "enable_security_question": (
+                    os.getenv("ENABLE_SECURITY_QUESTION", "true" if (sec_q and sec_a) else "false").lower() == "true"
+                ),
             }
         )
 
@@ -260,6 +262,7 @@ class ConfigManager:
         return {
             "headless": self._config["headless"],
             "base_url": self._config["base_url"],
+            "browser_type": self._config.get("browser_type", "edge"),
         }
 
     def get_auth_config(self) -> Dict[str, Any]:
