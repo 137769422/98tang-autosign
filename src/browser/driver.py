@@ -5,6 +5,10 @@
 """
 
 import os
+import sys
+import platform
+import subprocess
+import re
 import logging
 from typing import Optional, Dict, Any
 

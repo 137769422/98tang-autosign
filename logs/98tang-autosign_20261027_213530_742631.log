@@ -1,0 +1,70 @@
+2026-10-27 21:35:30 [INFO] setup_logger:108 - 98tang-autosign 日志系统初始化完成
+2026-10-27 21:35:30 [DEBUG] _init_telegram_notifier:112 - Telegram通知未启用
+2026-10-27 21:35:30 [INFO] __init__:87 - 配置加载完成，用户名: l137769422
+2026-10-27 21:35:30 [DEBUG] __init__:88 - 安全配置: {'username': 'l137769422', 'password': '!#*********Li', 'base_url': 'https://www.sehuatang.org', 'headless': False, 'log_level': 'DEBUG', 'log_dir': 'logs', 'max_log_files': 7, 'enable_security_question': True, 'security_answer': '***', 'security_question': '驾驶执照最后四位数字', 'detect_account_lockout': True, 'lockout_wait_minutes': 15, 'enable_reply': True, 'reply_count': 2, 'enable_random_browsing': True, 'browse_page_count': 3, 'wait_after_login': 5, 'comment_interval': 15, 'reply_messages': ['感谢分享资源，收藏了', '好资源收藏了，谢谢楼主', '感谢楼主的精彩分享', '谢谢分享，非常实用', '好内容，支持一下楼主', '感谢分享好资源，顶一个', '收藏支持，谢谢楼主分享', '好资源必须收藏，感谢分享', '谢谢楼主分享这么好的内容', '感谢分享，内容很棒'], 'enable_checkin': True, 'timing_multiplier': 1.0, 'enable_smart_timing': True, 'ENABLE_TELEGRAM_NOTIFICATION': False, 'TELEGRAM_BOT_TOKEN': '', 'TELEGRAM_CHAT_ID': '', 'TELEGRAM_PROXY_URL': '', 'TELEGRAM_SEND_LOG_FILE': False, 'TELEGRAM_SEND_SCREENSHOT': False, 'enable_humanlike': True, 'timeout_minutes': 10, 'timeout_seconds': 600, 'max_retries': 3}
+2026-10-27 21:35:30 [INFO] create_driver:163 - 开始创建浏览器驱动
+2026-10-27 21:35:30 [INFO] create_driver:168 - 使用undetected-chromedriver创建浏览器
+2026-10-27 21:35:30 [DEBUG] create_driver:179 - 使用有头模式（显示浏览器窗口）
+2026-10-27 21:35:30 [DEBUG] create_driver:226 - 添加浏览器参数: --no-sandbox
+2026-10-27 21:35:30 [DEBUG] create_driver:226 - 添加浏览器参数: --disable-dev-shm-usage
+2026-10-27 21:35:30 [DEBUG] create_driver:226 - 添加浏览器参数: --disable-blink-features=AutomationControlled
+2026-10-27 21:35:30 [DEBUG] create_driver:226 - 添加浏览器参数: --user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+2026-10-27 21:35:30 [DEBUG] create_driver:226 - 添加浏览器参数: --disable-popup-blocking
+2026-10-27 21:35:30 [DEBUG] create_driver:256 - 配置浏览器偏好设置: 弹出窗口允许、中文字体支持
+2026-10-27 21:35:31 [INFO] create_driver:269 - 检测到本地 Chrome 主版本号: 156
+2026-10-27 21:35:31 [DEBUG] create_driver:274 - 开始初始化浏览器实例
+2026-10-27 21:35:33 [DEBUG] create_driver:296 - 浏览器版本: 156.0.8078.48
+2026-10-27 21:35:33 [DEBUG] create_driver:297 - 驱动版本: 156.0.8078.47 (1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775-refs/branch-heads/8078@{#1313})
+2026-10-27 21:35:33 [INFO] create_driver:301 - 浏览器驱动创建成功
+2026-10-27 21:35:33 [INFO] login:322 - 开始登录流程
+2026-10-27 21:35:33 [DEBUG] login:325 - 访问首页: https://www.sehuatang.org
+2026-10-27 21:35:34 [DEBUG] smart_wait:117 - page_load延迟: 2.24秒
+2026-10-27 21:35:36 [DEBUG] login:330 - 开始处理年龄验证
+2026-10-27 21:35:36 [DEBUG] handle_age_verification:55 - 开始检查年龄验证页面
+2026-10-27 21:35:39 [DEBUG] find_by_selectors:53 - 找到元素: //a[contains(text(), '满18岁')]
+2026-10-27 21:35:39 [INFO] handle_age_verification:65 - 检测到年龄验证页面，正在处理
+2026-10-27 21:35:39 [DEBUG] handle_age_verification:68 - 找到年龄验证链接 - 文本: '满18岁，请点此进入', href: 'https://www.sehuatang.org/'
+2026-10-27 21:35:39 [DEBUG] smart_wait:117 - click延迟: 0.35秒
+2026-10-27 21:35:40 [DEBUG] wait_for_page_ready:184 - 页面加载完成
+2026-10-27 21:35:43 [DEBUG] smart_page_wait:228 - 关键元素已加载: .wp
+2026-10-27 21:35:43 [DEBUG] smart_wait:117 - click延迟: 0.30秒
+2026-10-27 21:35:43 [INFO] handle_age_verification:77 - 年龄验证处理完成
+2026-10-27 21:35:43 [DEBUG] find_clickable_by_selectors:86 - 找到可点击元素: //button[@type='submit']//em[contains(text(), '登录')]/..
+2026-10-27 21:35:43 [DEBUG] login:350 - 找到登录按钮，文本: '登录'，准备点击
+2026-10-27 21:35:43 [DEBUG] smart_wait:117 - click延迟: 0.38秒
+2026-10-27 21:35:44 [DEBUG] smart_wait:117 - navigation延迟: 1.02秒
+2026-10-27 21:35:45 [DEBUG] login:355 - 等待登录弹窗出现
+2026-10-27 21:35:45 [DEBUG] find_by_selectors:53 - 找到元素: #fwin_login
+2026-10-27 21:35:45 [DEBUG] login:362 - 登录弹窗已出现
+2026-10-27 21:35:45 [DEBUG] login:365 - 开始填写登录表单
+2026-10-27 21:35:45 [DEBUG] fill_login_form:222 - 开始填写登录表单
+2026-10-27 21:35:45 [DEBUG] find_by_selectors:53 - 找到元素: #fwin_login input[name='username']
+2026-10-27 21:35:45 [DEBUG] fill_login_form:236 - 找到用户名输入框，开始填写
+2026-10-27 21:35:45 [DEBUG] fill_login_form:239 - 用户名已填写: l1********
+2026-10-27 21:35:45 [DEBUG] find_by_selectors:53 - 找到元素: #fwin_login input[name='password']
+2026-10-27 21:35:45 [DEBUG] fill_login_form:255 - 找到密码输入框，开始填写
+2026-10-27 21:35:45 [DEBUG] fill_login_form:258 - 密码已填写（已掩码）
+2026-10-27 21:35:45 [DEBUG] smart_wait:117 - navigation延迟: 1.01秒
+2026-10-27 21:35:46 [DEBUG] fill_login_form:261 - 登录表单填写完成
+2026-10-27 21:35:46 [DEBUG] login:371 - 处理安全提问
+2026-10-27 21:35:46 [DEBUG] find_by_selectors:53 - 找到元素: select[name='questionid']
+2026-10-27 21:35:46 [INFO] handle_security_question:286 - 处理安全提问
+2026-10-27 21:35:46 [DEBUG] find_by_selectors:53 - 找到元素: input[name='answer']
+2026-10-27 21:35:46 [DEBUG] handle_security_question:305 - 安全提问答案已填写（已掩码）
+2026-10-27 21:35:46 [DEBUG] find_clickable_by_selectors:86 - 找到可点击元素: #fwin_login button[type='submit']
+2026-10-27 21:35:46 [DEBUG] login:390 - 找到提交按钮，文本: '登录'，准备提交登录
+2026-10-27 21:35:46 [DEBUG] smart_wait:117 - click延迟: 0.43秒
+2026-10-27 21:35:47 [DEBUG] smart_wait:117 - page_load延迟: 3.00秒
+2026-10-27 21:35:50 [DEBUG] login:397 - 验证登录结果
+2026-10-27 21:35:50 [DEBUG] check_login_status:95 - 开始检查登录状态
+2026-10-27 21:35:51 [DEBUG] find_by_selectors:59 - 未找到任何元素: ['#ntcwin .pc_inner i']
+2026-10-27 21:35:52 [DEBUG] find_by_selectors:59 - 未找到任何元素: ['#returnmessage_Luu4S']
+2026-10-27 21:35:53 [DEBUG] find_by_selectors:59 - 未找到任何元素: ['.alert_error']
+2026-10-27 21:35:54 [DEBUG] find_by_selectors:59 - 未找到任何元素: ['.error']
+2026-10-27 21:35:57 [DEBUG] find_by_selectors:53 - 找到元素: //a[contains(text(), 'l137769422')]
+2026-10-27 21:35:57 [DEBUG] check_login_status:116 - 找到用户名元素，文本内容: 'l137769422'
+2026-10-27 21:35:57 [DEBUG] check_login_status:118 - 用户名匹配成功，已登录
+2026-10-27 21:35:57 [INFO] login:400 - 登录成功
+2026-10-27 21:36:48 [DEBUG] _cleanup:635 - 开始清理资源
+2026-10-27 21:36:48 [INFO] quit_driver:328 - 浏览器已关闭
+2026-10-27 21:36:48 [DEBUG] _cleanup:640 - 资源清理完成

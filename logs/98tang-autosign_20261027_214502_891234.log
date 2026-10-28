@@ -1,0 +1,212 @@
+2026-10-27 21:45:02 [INFO] setup_logger:108 - 98tang-autosign 日志系统初始化完成
+2026-10-27 21:45:02 [DEBUG] _init_telegram_notifier:112 - Telegram通知未启用
+2026-10-27 21:45:02 [INFO] __init__:87 - 配置加载完成，用户名: l137769422
+2026-10-27 21:45:02 [DEBUG] __init__:88 - 安全配置: {'username': 'l137769422', 'password': '!#*********Li', 'base_url': 'https://www.sehuatang.org', 'headless': False, 'log_level': 'DEBUG', 'log_dir': 'logs', 'max_log_files': 7, 'enable_security_question': True, 'security_answer': '***', 'security_question': '驾驶执照最后四位数字', 'detect_account_lockout': True, 'lockout_wait_minutes': 15, 'enable_reply': True, 'reply_count': 2, 'enable_random_browsing': True, 'browse_page_count': 3, 'wait_after_login': 5, 'comment_interval': 15, 'reply_messages': ['感谢分享资源，收藏了', '好资源收藏了，谢谢楼主', '感谢楼主的精彩分享', '谢谢分享，非常实用', '好内容，支持一下楼主', '感谢分享好资源，顶一个', '收藏支持，谢谢楼主分享', '好资源必须收藏，感谢分享', '谢谢楼主分享这么好的内容', '感谢分享，内容很棒'], 'enable_checkin': True, 'timing_multiplier': 1.0, 'enable_smart_timing': True, 'ENABLE_TELEGRAM_NOTIFICATION': False, 'TELEGRAM_BOT_TOKEN': '', 'TELEGRAM_CHAT_ID': '', 'TELEGRAM_PROXY_URL': '', 'TELEGRAM_SEND_LOG_FILE': False, 'TELEGRAM_SEND_SCREENSHOT': False, 'enable_humanlike': True, 'timeout_minutes': 10, 'timeout_seconds': 600, 'max_retries': 3}
+2026-10-27 21:45:02 [INFO] run:532 - 启动超时保护，超时时间: 10 分钟
+2026-10-27 21:45:02 [INFO] run:544 - 开始98tang-autosign程序
+2026-10-27 21:45:02 [DEBUG] run:550 - 步骤1: 创建浏览器驱动
+2026-10-27 21:45:02 [INFO] create_driver:163 - 开始创建浏览器驱动
+2026-10-27 21:45:02 [INFO] create_driver:168 - 使用undetected-chromedriver创建浏览器
+2026-10-27 21:45:02 [DEBUG] create_driver:179 - 使用有头模式（显示浏览器窗口）
+2026-10-27 21:45:02 [DEBUG] create_driver:226 - 添加浏览器参数: --no-sandbox
+2026-10-27 21:45:02 [DEBUG] create_driver:226 - 添加浏览器参数: --disable-dev-shm-usage
+2026-10-27 21:45:02 [DEBUG] create_driver:226 - 添加浏览器参数: --disable-blink-features=AutomationControlled
+2026-10-27 21:45:02 [DEBUG] create_driver:226 - 添加浏览器参数: --user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+2026-10-27 21:45:02 [DEBUG] create_driver:226 - 添加浏览器参数: --disable-popup-blocking
+2026-10-27 21:45:02 [DEBUG] create_driver:256 - 配置浏览器偏好设置: 弹出窗口允许、中文字体支持
+2026-10-27 21:45:03 [INFO] create_driver:269 - 检测到本地 Chrome 主版本号: 156
+2026-10-27 21:45:03 [DEBUG] create_driver:274 - 开始初始化浏览器实例
+2026-10-27 21:45:05 [DEBUG] create_driver:296 - 浏览器版本: 156.0.8078.48
+2026-10-27 21:45:05 [DEBUG] create_driver:297 - 驱动版本: 156.0.8078.47 (1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775-refs/branch-heads/8078@{#1313})
+2026-10-27 21:45:05 [INFO] create_driver:301 - 浏览器驱动创建成功
+2026-10-27 21:45:05 [DEBUG] run:555 - 浏览器驱动创建成功
+2026-10-27 21:45:05 [DEBUG] run:558 - 步骤2: 初始化业务管理器
+2026-10-27 21:45:05 [DEBUG] run:563 - 业务管理器初始化成功
+2026-10-27 21:45:05 [DEBUG] run:566 - 步骤3: 执行登录流程
+2026-10-27 21:45:05 [INFO] login:322 - 开始登录流程
+2026-10-27 21:45:05 [DEBUG] login:325 - 访问首页: https://www.sehuatang.org
+2026-10-27 21:45:05 [DEBUG] smart_wait:117 - page_load延迟: 2.10秒
+2026-10-27 21:45:08 [DEBUG] login:330 - 开始处理年龄验证
+2026-10-27 21:45:08 [DEBUG] handle_age_verification:55 - 开始检查年龄验证页面
+2026-10-27 21:45:11 [DEBUG] find_by_selectors:53 - 找到元素: //a[contains(text(), '满18岁')]
+2026-10-27 21:45:11 [INFO] handle_age_verification:65 - 检测到年龄验证页面，正在处理
+2026-10-27 21:45:11 [DEBUG] handle_age_verification:68 - 找到年龄验证链接 - 文本: '满18岁，请点此进入', href: 'https://www.sehuatang.org/'
+2026-10-27 21:45:11 [DEBUG] smart_wait:117 - click延迟: 0.47秒
+2026-10-27 21:45:12 [DEBUG] wait_for_page_ready:184 - 页面加载完成
+2026-10-27 21:45:15 [DEBUG] smart_page_wait:228 - 关键元素已加载: .wp
+2026-10-27 21:45:15 [DEBUG] smart_wait:117 - click延迟: 0.32秒
+2026-10-27 21:45:15 [INFO] handle_age_verification:77 - 年龄验证处理完成
+2026-10-27 21:45:15 [DEBUG] find_clickable_by_selectors:86 - 找到可点击元素: //button[@type='submit']//em[contains(text(), '登录')]/..
+2026-10-27 21:45:15 [DEBUG] login:350 - 找到登录按钮，文本: '登录'，准备点击
+2026-10-27 21:45:15 [DEBUG] smart_wait:117 - click延迟: 0.36秒
+2026-10-27 21:45:16 [DEBUG] smart_wait:117 - navigation延迟: 0.71秒
+2026-10-27 21:45:17 [DEBUG] login:355 - 等待登录弹窗出现
+2026-10-27 21:45:17 [DEBUG] find_by_selectors:53 - 找到元素: #fwin_login
+2026-10-27 21:45:17 [DEBUG] login:362 - 登录弹窗已出现
+2026-10-27 21:45:17 [DEBUG] login:365 - 开始填写登录表单
+2026-10-27 21:45:17 [DEBUG] fill_login_form:222 - 开始填写登录表单
+2026-10-27 21:45:17 [DEBUG] find_by_selectors:53 - 找到元素: #fwin_login input[name='username']
+2026-10-27 21:45:17 [DEBUG] fill_login_form:236 - 找到用户名输入框，开始填写
+2026-10-27 21:45:17 [DEBUG] fill_login_form:239 - 用户名已填写: l1********
+2026-10-27 21:45:17 [DEBUG] find_by_selectors:53 - 找到元素: #fwin_login input[name='password']
+2026-10-27 21:45:17 [DEBUG] fill_login_form:255 - 找到密码输入框，开始填写
+2026-10-27 21:45:17 [DEBUG] fill_login_form:258 - 密码已填写（已掩码）
+2026-10-27 21:45:17 [DEBUG] smart_wait:117 - navigation延迟: 0.81秒
+2026-10-27 21:45:17 [DEBUG] fill_login_form:261 - 登录表单填写完成
+2026-10-27 21:45:17 [DEBUG] login:371 - 处理安全提问
+2026-10-27 21:45:17 [DEBUG] find_by_selectors:53 - 找到元素: select[name='questionid']
+2026-10-27 21:45:17 [INFO] handle_security_question:286 - 处理安全提问
+2026-10-27 21:45:17 [DEBUG] find_by_selectors:53 - 找到元素: input[name='answer']
+2026-10-27 21:45:18 [DEBUG] handle_security_question:305 - 安全提问答案已填写（已掩码）
+2026-10-27 21:45:18 [DEBUG] find_clickable_by_selectors:86 - 找到可点击元素: #fwin_login button[type='submit']
+2026-10-27 21:45:18 [DEBUG] login:390 - 找到提交按钮，文本: '登录'，准备提交登录
+2026-10-27 21:45:18 [DEBUG] smart_wait:117 - click延迟: 0.46秒
+2026-10-27 21:45:18 [DEBUG] smart_wait:117 - page_load延迟: 2.33秒
+2026-10-27 21:45:20 [DEBUG] login:397 - 验证登录结果
+2026-10-27 21:45:20 [DEBUG] check_login_status:95 - 开始检查登录状态
+2026-10-27 21:45:22 [DEBUG] find_by_selectors:59 - 未找到任何元素: ['#ntcwin .pc_inner i']
+2026-10-27 21:45:23 [DEBUG] find_by_selectors:59 - 未找到任何元素: ['#returnmessage_Luu4S']
+2026-10-27 21:45:24 [DEBUG] find_by_selectors:59 - 未找到任何元素: ['.alert_error']
+2026-10-27 21:45:25 [DEBUG] find_by_selectors:59 - 未找到任何元素: ['.error']
+2026-10-27 21:45:28 [DEBUG] find_by_selectors:53 - 找到元素: //a[contains(text(), 'l137769422')]
+2026-10-27 21:45:28 [DEBUG] check_login_status:116 - 找到用户名元素，文本内容: 'l137769422'
+2026-10-27 21:45:28 [DEBUG] check_login_status:118 - 用户名匹配成功，已登录
+2026-10-27 21:45:28 [INFO] login:400 - 登录成功
+2026-10-27 21:45:28 [DEBUG] run:571 - 登录流程完成
+2026-10-27 21:45:28 [DEBUG] run:574 - 步骤4: 执行拟人化活动
+2026-10-27 21:45:28 [INFO] _perform_humanlike_activities:451 - 开始执行拟人化活动
+2026-10-27 21:45:28 [INFO] perform_humanlike_activities_with_results:316 - 开始拟人化活动
+2026-10-27 21:45:28 [DEBUG] smart_wait:117 - page_load延迟: 1.21秒
+2026-10-27 21:45:29 [INFO] perform_humanlike_activities_with_results:323 - 执行随机浏览
+2026-10-27 21:45:29 [INFO] random_browse_pages:49 - 开始浏览综合讨论区，共 3 页
+2026-10-27 21:45:30 [DEBUG] smart_wait:117 - page_load延迟: 2.03秒
+2026-10-27 21:45:32 [INFO] random_browse_pages:65 - 计划在 综合讨论区 中浏览 3 页
+2026-10-27 21:45:32 [INFO] random_browse_pages:70 - 正在浏览 综合讨论区 第 1 页
+2026-10-27 21:45:32 [DEBUG] human_like_scroll:127 - 页面滚动信息: 总高度=3057, 视窗高度=402, 当前位置=0
+2026-10-27 21:45:32 [DEBUG] human_like_scroll:172 - 执行滚动行为: 初始扫视 (目标位置: 398px)
+2026-10-27 21:45:32 [DEBUG] smart_wait:117 - reading延迟: 0.56秒
+2026-10-27 21:45:33 [DEBUG] human_like_scroll:172 - 执行滚动行为: 仔细阅读 (目标位置: 1062px)
+2026-10-27 21:45:33 [DEBUG] smart_wait:117 - reading延迟: 1.39秒
+2026-10-27 21:45:34 [DEBUG] human_like_scroll:172 - 执行滚动行为: 快速浏览 (目标位置: 1858px)
+2026-10-27 21:45:34 [DEBUG] smart_wait:117 - reading延迟: 1.40秒
+2026-10-27 21:45:36 [DEBUG] human_like_scroll:172 - 执行滚动行为: 到达底部 (目标位置: 2522px)
+2026-10-27 21:45:36 [DEBUG] smart_wait:117 - scroll延迟: 0.76秒
+2026-10-27 21:45:37 [DEBUG] human_like_scroll:223 - 人性化平滑滚动完成
+2026-10-27 21:45:37 [DEBUG] smart_wait:117 - navigation延迟: 0.78秒
+2026-10-27 21:45:37 [DEBUG] find_clickable_by_selectors:86 - 找到可点击元素: #fd_page_bottom .pg a.nxt
+2026-10-27 21:45:37 [INFO] _browse_next_page_with_click:483 - 找到合适的翻页按钮，准备点击
+2026-10-27 21:45:37 [INFO] _click_next_page_button:459 - 准备点击下一页按钮: 下一页 - https://www.sehuatang.org/forum.php?mod=forumdisplay&fid=95&page=2
+2026-10-27 21:45:37 [DEBUG] smart_wait:117 - click延迟: 0.34秒
+2026-10-27 21:45:38 [DEBUG] smart_wait:117 - page_load延迟: 1.43秒
+2026-10-27 21:45:40 [INFO] _click_next_page_button:467 - 翻页成功，当前URL: https://www.sehuatang.org/forum.php?mod=forumdisplay&fid=95&page=2
+2026-10-27 21:45:40 [INFO] random_browse_pages:70 - 正在浏览 综合讨论区 第 2 页
+2026-10-27 21:45:40 [DEBUG] human_like_scroll:127 - 页面滚动信息: 总高度=2711, 视窗高度=402, 当前位置=0
+2026-10-27 21:45:40 [DEBUG] human_like_scroll:172 - 执行滚动行为: 初始扫视 (目标位置: 346px)
+2026-10-27 21:45:40 [DEBUG] smart_wait:117 - reading延迟: 0.74秒
+2026-10-27 21:45:40 [DEBUG] human_like_scroll:172 - 执行滚动行为: 仔细阅读 (目标位置: 923px)
+2026-10-27 21:45:40 [DEBUG] smart_wait:117 - reading延迟: 1.69秒
+2026-10-27 21:45:42 [DEBUG] human_like_scroll:172 - 执行滚动行为: 快速浏览 (目标位置: 1616px)
+2026-10-27 21:45:42 [DEBUG] smart_wait:117 - reading延迟: 1.35秒
+2026-10-27 21:45:43 [DEBUG] human_like_scroll:172 - 执行滚动行为: 到达底部 (目标位置: 2193px)
+2026-10-27 21:45:43 [DEBUG] smart_wait:117 - scroll延迟: 0.64秒
+2026-10-27 21:45:44 [DEBUG] human_like_scroll:223 - 人性化平滑滚动完成
+2026-10-27 21:45:44 [DEBUG] smart_wait:117 - navigation延迟: 1.07秒
+2026-10-27 21:45:45 [DEBUG] find_clickable_by_selectors:86 - 找到可点击元素: #fd_page_bottom .pg a.nxt
+2026-10-27 21:45:45 [INFO] _browse_next_page_with_click:483 - 找到合适的翻页按钮，准备点击
+2026-10-27 21:45:45 [INFO] _click_next_page_button:459 - 准备点击下一页按钮: 下一页 - https://www.sehuatang.org/forum.php?mod=forumdisplay&fid=95&page=3
+2026-10-27 21:45:45 [DEBUG] smart_wait:117 - click延迟: 0.39秒
+2026-10-27 21:45:46 [DEBUG] smart_wait:117 - page_load延迟: 1.93秒
+2026-10-27 21:45:48 [INFO] _click_next_page_button:467 - 翻页成功，当前URL: https://www.sehuatang.org/forum.php?mod=forumdisplay&fid=95&page=3
+2026-10-27 21:45:48 [INFO] random_browse_pages:70 - 正在浏览 综合讨论区 第 3 页
+2026-10-27 21:45:48 [DEBUG] human_like_scroll:127 - 页面滚动信息: 总高度=2712, 视窗高度=402, 当前位置=0
+2026-10-27 21:45:48 [DEBUG] human_like_scroll:172 - 执行滚动行为: 初始扫视 (目标位置: 346px)
+2026-10-27 21:45:48 [DEBUG] smart_wait:117 - reading延迟: 0.97秒
+2026-10-27 21:45:49 [DEBUG] human_like_scroll:172 - 执行滚动行为: 仔细阅读 (目标位置: 924px)
+2026-10-27 21:45:49 [DEBUG] smart_wait:117 - reading延迟: 1.82秒
+2026-10-27 21:45:51 [DEBUG] human_like_scroll:172 - 执行滚动行为: 快速浏览 (目标位置: 1617px)
+2026-10-27 21:45:51 [DEBUG] smart_wait:117 - reading延迟: 1.17秒
+2026-10-27 21:45:52 [DEBUG] human_like_scroll:172 - 执行滚动行为: 到达底部 (目标位置: 2194px)
+2026-10-27 21:45:52 [DEBUG] smart_wait:117 - scroll延迟: 0.43秒
+2026-10-27 21:45:52 [DEBUG] human_like_scroll:223 - 人性化平滑滚动完成
+2026-10-27 21:45:52 [DEBUG] smart_wait:117 - reading延迟: 2.06秒
+2026-10-27 21:45:54 [INFO] random_browse_pages:110 - 随机浏览完成
+2026-10-27 21:45:54 [INFO] perform_humanlike_activities_with_results:339 - 开始回帖活动，目标数量: 2
+2026-10-27 21:45:55 [DEBUG] smart_wait:117 - page_load延迟: 1.64秒
+2026-10-27 21:45:57 [INFO] find_reply_targets:131 - 开始从第二页查找可回复的帖子
+2026-10-27 21:45:57 [DEBUG] find_clickable_by_selectors:86 - 找到可点击元素: #fd_page_bottom .pg a.nxt
+2026-10-27 21:45:57 [INFO] find_reply_targets:136 - 找到下一页按钮，正在翻页到第二页
+2026-10-27 21:45:57 [INFO] _click_next_page_button:459 - 准备点击下一页按钮: 下一页 - https://www.sehuatang.org/forum.php?mod=forumdisplay&fid=95&page=2
+2026-10-27 21:45:57 [DEBUG] smart_wait:117 - click延迟: 0.45秒
+2026-10-27 21:45:59 [DEBUG] smart_wait:117 - page_load延迟: 1.79秒
+2026-10-27 21:46:00 [INFO] _click_next_page_button:467 - 翻页成功，当前URL: https://www.sehuatang.org/forum.php?mod=forumdisplay&fid=95&page=2
+2026-10-27 21:46:00 [INFO] find_reply_targets:138 - 翻页成功
+2026-10-27 21:46:00 [INFO] find_reply_targets:198 - 从第二页找到 20 个可回复帖子，选择 2 个进行回复
+2026-10-27 21:46:00 [INFO] reply_to_post:219 - 回复帖子: 【自转】【115ED2k】AI短剧10.2更新《从地狱归来：深渊调教》1-8《我老婆的特殊癖好》1-
+2026-10-27 21:46:05 [DEBUG] smart_wait:117 - page_load延迟: 1.35秒
+2026-10-27 21:46:07 [DEBUG] human_like_scroll:127 - 页面滚动信息: 总高度=18901, 视窗高度=402, 当前位置=0
+2026-10-27 21:46:07 [DEBUG] human_like_scroll:172 - 执行滚动行为: 初始扫视 (目标位置: 2774px)
+2026-10-27 21:46:07 [DEBUG] smart_wait:117 - reading延迟: 0.81秒
+2026-10-27 21:46:08 [DEBUG] human_like_scroll:216 - 页面高度发生变化: 18901 -> 13124
+2026-10-27 21:46:08 [DEBUG] human_like_scroll:172 - 执行滚动行为: 仔细阅读 (目标位置: 5088px)
+2026-10-27 21:46:08 [DEBUG] smart_wait:117 - reading延迟: 2.38秒
+2026-10-27 21:46:10 [DEBUG] human_like_scroll:216 - 页面高度发生变化: 13124 -> 14248
+2026-10-27 21:46:10 [DEBUG] human_like_scroll:172 - 执行滚动行为: 快速浏览 (目标位置: 9692px)
+2026-10-27 21:46:10 [DEBUG] smart_wait:117 - reading延迟: 0.91秒
+2026-10-27 21:46:11 [DEBUG] human_like_scroll:216 - 页面高度发生变化: 14248 -> 12698
+2026-10-27 21:46:11 [DEBUG] human_like_scroll:172 - 执行滚动行为: 到达底部 (目标位置: 11681px)
+2026-10-27 21:46:11 [DEBUG] smart_wait:117 - scroll延迟: 0.36秒
+2026-10-27 21:46:11 [DEBUG] human_like_scroll:223 - 人性化平滑滚动完成
+2026-10-27 21:46:11 [INFO] _smart_scroll_to_reply_area:405 - 寻找回复文本框
+2026-10-27 21:46:11 [DEBUG] find_by_selectors:53 - 找到元素: #fastpostmessage
+2026-10-27 21:46:11 [INFO] _smart_scroll_to_reply_area:419 - 在当前视窗中找到回复文本框
+2026-10-27 21:46:11 [DEBUG] smart_wait:117 - navigation延迟: 0.75秒
+2026-10-27 21:46:12 [DEBUG] find_clickable_by_selectors:86 - 找到可点击元素: #fastpostsubmit
+2026-10-27 21:46:12 [DEBUG] smart_wait:117 - click延迟: 0.47秒
+2026-10-27 21:46:13 [DEBUG] smart_wait:117 - page_load延迟: 1.09秒
+2026-10-27 21:46:14 [INFO] reply_to_post:254 - 回复提交成功
+2026-10-27 21:46:14 [DEBUG] smart_wait:117 - reply_interval延迟: 17.76秒
+2026-10-27 21:46:31 [INFO] perform_humanlike_activities_with_results:363 - 回帖间隔等待 17.8 秒，模拟真实用户行为
+2026-10-27 21:46:31 [INFO] reply_to_post:219 - 回复帖子: 【RINの同人二创】S1编年史（1077 后日谈 12）
+2026-10-27 21:46:33 [DEBUG] smart_wait:117 - page_load延迟: 2.31秒
+2026-10-27 21:46:36 [DEBUG] human_like_scroll:127 - 页面滚动信息: 总高度=23145, 视窗高度=402, 当前位置=0
+2026-10-27 21:46:36 [DEBUG] human_like_scroll:172 - 执行滚动行为: 初始扫视 (目标位置: 3411px)
+2026-10-27 21:46:36 [DEBUG] smart_wait:117 - reading延迟: 0.68秒
+2026-10-27 21:46:36 [DEBUG] human_like_scroll:216 - 页面高度发生变化: 23145 -> 23257
+2026-10-27 21:46:36 [DEBUG] human_like_scroll:172 - 执行滚动行为: 仔细阅读 (目标位置: 9142px)
+2026-10-27 21:46:36 [DEBUG] smart_wait:117 - reading延迟: 1.63秒
+2026-10-27 21:46:38 [DEBUG] human_like_scroll:216 - 页面高度发生变化: 23257 -> 23284
+2026-10-27 21:46:38 [DEBUG] human_like_scroll:172 - 执行滚动行为: 快速浏览 (目标位置: 16017px)
+2026-10-27 21:46:38 [DEBUG] smart_wait:117 - reading延迟: 1.41秒
+2026-10-27 21:46:39 [DEBUG] human_like_scroll:216 - 页面高度发生变化: 23284 -> 23478
+2026-10-27 21:46:39 [DEBUG] human_like_scroll:172 - 执行滚动行为: 到达底部 (目标位置: 21922px)
+2026-10-27 21:46:39 [DEBUG] smart_wait:117 - scroll延迟: 0.43秒
+2026-10-27 21:46:40 [DEBUG] human_like_scroll:223 - 人性化平滑滚动完成
+2026-10-27 21:46:40 [INFO] _smart_scroll_to_reply_area:405 - 寻找回复文本框
+2026-10-27 21:46:40 [DEBUG] find_by_selectors:53 - 找到元素: #fastpostmessage
+2026-10-27 21:46:40 [INFO] _smart_scroll_to_reply_area:419 - 在当前视窗中找到回复文本框
+2026-10-27 21:46:40 [DEBUG] smart_wait:117 - navigation延迟: 0.97秒
+2026-10-27 21:46:41 [DEBUG] find_clickable_by_selectors:86 - 找到可点击元素: #fastpostsubmit
+2026-10-27 21:46:41 [DEBUG] smart_wait:117 - click延迟: 0.39秒
+2026-10-27 21:46:41 [DEBUG] smart_wait:117 - page_load延迟: 1.37秒
+2026-10-27 21:46:43 [INFO] reply_to_post:254 - 回复提交成功
+2026-10-27 21:46:43 [INFO] perform_humanlike_activities_with_results:385 - 回帖活动完成，成功 2/2 个
+2026-10-27 21:46:43 [INFO] _perform_humanlike_activities:477 - 拟人化活动执行完成
+2026-10-27 21:46:43 [DEBUG] run:578 - 步骤5: 执行签到流程
+2026-10-27 21:46:43 [INFO] _perform_signin:496 - 开始执行签到
+2026-10-27 21:46:43 [INFO] sign_in:771 - 开始签到流程
+2026-10-27 21:46:43 [DEBUG] smart_wait:117 - page_load延迟: 1.08秒
+2026-10-27 21:46:44 [DEBUG] _navigate_to_signin_page:972 - 尝试进入签到页面 - 第1次
+2026-10-27 21:46:44 [DEBUG] find_clickable_by_selectors:86 - 找到可点击元素: a[href="plugin.php?id=dd_sign:index"]
+2026-10-27 21:46:44 [DEBUG] smart_wait:117 - click延迟: 0.32秒
+2026-10-27 21:46:46 [DEBUG] smart_wait:117 - page_load延迟: 1.76秒
+2026-10-27 21:46:48 [INFO] _navigate_to_signin_page:995 - 成功进入签到页面: https://www.sehuatang.org/plugin.php?id=dd_sign
+2026-10-27 21:46:48 [DEBUG] _check_signin_status:812 - 检查签到状态，查找签到按钮区域
+2026-10-27 21:46:48 [DEBUG] find_by_selectors:53 - 找到元素: div.ddpc_sign_btna
+2026-10-27 21:46:48 [DEBUG] _check_signin_status:835 - 检查按钮 - class: 'ddpc_sign_btn_grey', text: '今日已签到'
+2026-10-27 21:46:48 [INFO] _check_signin_status:842 - ✅ 检测到已签到状态: 今日已签到
+2026-10-27 21:46:48 [INFO] sign_in:786 - ✅ 今日已签到
+2026-10-27 21:46:48 [INFO] _perform_signin:499 - 签到完成
+2026-10-27 21:46:48 [INFO] run:593 - 程序执行完成
+2026-10-27 21:46:48 [DEBUG] _cleanup:635 - 开始清理资源
+2026-10-27 21:46:48 [INFO] quit_driver:328 - 浏览器已关闭
+2026-10-27 21:46:48 [DEBUG] _cleanup:640 - 资源清理完成

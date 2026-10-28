@@ -1,0 +1,10 @@
+2026-10-27 22:02:03 [INFO] setup_logger:108 - 98tang-autosign 日志系统初始化完成
+2026-10-27 22:02:03 [DEBUG] setup_logger:110 - 日志文件: logs/98tang-autosign_20261027_220203_972205.log
+2026-10-27 22:02:03 [DEBUG] setup_logger:111 - 日志级别: DEBUG
+2026-10-27 22:02:03 [DEBUG] _init_telegram_notifier:112 - Telegram通知未启用
+2026-10-27 22:02:03 [INFO] __init__:83 - 调试模式已启用，将输出详细信息
+2026-10-27 22:02:03 [INFO] __init__:87 - 配置加载完成，用户名: l137769422
+2026-10-27 22:02:03 [DEBUG] __init__:88 - 安全配置: {'username': 'l137769422', 'password': '!#*********Li', 'base_url': 'https://www.sehuatang.org', 'headless': False, 'browser_type': 'edge', 'log_level': 'DEBUG', 'log_dir': 'logs', 'max_log_files': 7, 'enable_security_question': True, 'security_answer': '***', 'security_question': '驾驶执照最后四位数字', 'detect_account_lockout': True, 'lockout_wait_minutes': 15, 'enable_reply': True, 'reply_count': 2, 'enable_random_browsing': True, 'browse_page_count': 3, 'wait_after_login': 5, 'comment_interval': 15, 'reply_messages': ['感谢分享资源，收藏了', '好资源收藏了，谢谢楼主', '感谢楼主的精彩分享', '谢谢分享，非常实用', '好内容，支持一下楼主', '感谢分享好资源，顶一个', '收藏支持，谢谢楼主分享', '好资源必须收藏，感谢分享', '谢谢楼主分享这么好的内容', '感谢分享，内容很棒'], 'enable_checkin': True, 'timing_multiplier': 1.0, 'enable_smart_timing': True, 'ENABLE_TELEGRAM_NOTIFICATION': False, 'TELEGRAM_BOT_TOKEN': '', 'TELEGRAM_CHAT_ID': '', 'TELEGRAM_PROXY_URL': '', 'TELEGRAM_SEND_LOG_FILE': False, 'TELEGRAM_SEND_SCREENSHOT': False, 'enable_humanlike': True, 'timeout_minutes': 10, 'timeout_seconds': 600, 'max_retries': 3}
+2026-10-27 22:02:03 [INFO] create_driver:163 - 开始创建浏览器驱动
+2026-10-27 22:02:03 [INFO] create_driver:170 - 使用 Microsoft Edge 浏览器创建驱动
+2026-10-27 22:02:03 [ERROR] create_driver:355 - 创建浏览器驱动失败: cannot access local variable 'os' where it is not associated with a value
